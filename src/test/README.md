@@ -1,0 +1,1 @@
+This project is used for calculating and interpreting BMI
