@@ -4,11 +4,9 @@ import java.util.Arrays;
 
 public class CalculateBMI implements Calculator {
 
-    private double weight; //statyczna jak raz ją zmienie to się zmmieni wszędzie
+    private double weight;
     private double height;
 
-    public CalculateBMI() {
-    }
 
     public CalculateBMI(double weight, double height) {
         if (weight <= 0 || height <= 0) {
@@ -19,7 +17,7 @@ public class CalculateBMI implements Calculator {
         }
     }
 
-    public String calculateBMI() {
+    public String calculate() {
 
         double bmi = (weight / Math.pow(height, 2))*10000;
         BigDecimal bmiBig = new BigDecimal(bmi);
@@ -28,12 +26,12 @@ public class CalculateBMI implements Calculator {
 
     }
 
-    public String interpretBMI() {
+    public String interpret() {
 
         double[] bmiResult = {18.5,23.0,25.0};
         String[] labels = {"Underweight","Normal Range","At Risk", "Overweight"};
 
-        double result = Double.parseDouble(calculateBMI());
+        double result = Double.parseDouble(calculate());
         int index= Math.abs(Arrays.binarySearch(bmiResult,result))-1;
         return labels[index];
 

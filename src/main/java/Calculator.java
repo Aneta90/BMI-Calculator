@@ -1,11 +1,6 @@
-public interface Calculator { //Interface Calculator<T>
+public interface Calculator {
 
-    public String calculateBMI();
-
-    //<T> calculate(double...params)
-
-    public String interpretBMI();
-
-    //String interpret(<T> bmiResult)
+    String calculate();
+    String interpret();
 
 }

@@ -25,7 +25,7 @@ public class CalculatorTest extends TestCase {
     @Parameters(method = "calcLegalValues")
     public void testCalculateLegalAgrumentsBMI(double weight, double height, double expectedValue) {
         CalculateBMI calculateBMI = new CalculateBMI(weight, height);
-        assertEquals(expectedValue, Double.parseDouble(calculateBMI.calculateBMI()),0.1);
+        assertEquals(expectedValue, Double.parseDouble(calculateBMI.calculate()),0.1);
     }
 
     private Object[] calcLegalValues() {
@@ -38,7 +38,7 @@ public class CalculatorTest extends TestCase {
     @Parameters(method="interpretResults")
     public void testInterpretationOfBMI(double weight, double height, String category){
         CalculateBMI calculateBMI = new CalculateBMI(weight,height);
-        assertEquals(calculateBMI.interpretBMI(),category);
+        assertEquals(calculateBMI.interpret(),category);
     }
 
     private Object[] interpretResults() {
