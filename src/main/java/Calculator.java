@@ -1,6 +1,6 @@
-public interface Calculator {
+public interface Calculator<T> {
 
-    String calculate();
-    String interpret();
+    T calculate(double...a);
+    T interpret(T paramTiInterpret);
 
 }

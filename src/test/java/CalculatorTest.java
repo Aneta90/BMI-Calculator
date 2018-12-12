@@ -1,6 +1,7 @@
 import junit.framework.TestCase;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -8,10 +9,18 @@ import org.junit.runner.RunWith;
 
 public class CalculatorTest extends TestCase {
 
+    CalculateBMI calculateBMI;
+
+    @Before
+    public void setUp() {
+        calculateBMI = new CalculateBMI();
+    }
+
+
     @Test(expected = IllegalArgumentException.class)
     @Parameters(method = "calcIllegalValues")
     public void testCalculateIllegalArgumentsBMI(double weight, double height) {
-        CalculateBMI calculateBMI = new CalculateBMI(weight, height);
+        calculateBMI.calculate(weight,height);
     }
 
     private Object[] calcIllegalValues() {
@@ -23,29 +32,27 @@ public class CalculatorTest extends TestCase {
 
     @Test
     @Parameters(method = "calcLegalValues")
-    public void testCalculateLegalAgrumentsBMI(double weight, double height, double expectedValue) {
-        CalculateBMI calculateBMI = new CalculateBMI(weight, height);
-        assertEquals(expectedValue, Double.parseDouble(calculateBMI.calculate()),0.1);
+    public void testCalculateLegalAgrumentsBMI(double weight, double height, String expected) {
+        assertEquals(calculateBMI.calculate(weight,height),expected);
     }
 
     private Object[] calcLegalValues() {
         return new Object[]{
-                new Object[]{54.0, 160.0, 21.09}
+                new Object[]{54.0, 160.0, "21"}
         };
     }
 
     @Test
     @Parameters(method="interpretResults")
-    public void testInterpretationOfBMI(double weight, double height, String category){
-        CalculateBMI calculateBMI = new CalculateBMI(weight,height);
-        assertEquals(calculateBMI.interpret(),category);
+    public void testInterpretationOfBMI(String bmi, String category){
+        assertEquals(calculateBMI.interpret(bmi),category);
     }
 
     private Object[] interpretResults() {
         return new Object[]{
-                new Object[]{25.0,160.0,"Underweight"},
-                new Object[]{54.0,160.0,"Normal Range"},
-                new Object[]{80.0,160.0,"Overweight"}
+                new Object[]{"16.0","Underweight"},
+                new Object[]{"21.0","Normal Range"},
+                new Object[]{"26.0","Overweight"}
         };
     }
 
